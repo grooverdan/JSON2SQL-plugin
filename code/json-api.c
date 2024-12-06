@@ -112,7 +112,7 @@ static char* handle_get_request(const char *url) {
            return json_string; // Caller is responsible for freeing this memory
         }
       
-        if (mysql_query(conn, query)) {
+        if (mysql_real_query(conn, query, strlen(query))) {
            fprintf(stderr, "mysql_query() failed\n");
            mysql_close(conn);
            cJSON_AddStringToObject(json, "status", "QUERY failed");
